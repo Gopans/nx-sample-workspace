@@ -1,0 +1,177 @@
+{
+  "version": 1,
+  "projects": {
+    "coins": {
+      "projectType": "application",
+      "root": "apps/coins",
+      "sourceRoot": "apps/coins/src",
+      "prefix": "nx-sample-workspace",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "outputs": ["{options.outputPath}"],
+          "options": {
+            "outputPath": "dist/apps/coins",
+            "index": "apps/coins/src/index.html",
+            "main": "apps/coins/src/main.ts",
+            "polyfills": "apps/coins/src/polyfills.ts",
+            "tsConfig": "apps/coins/tsconfig.app.json",
+            "inlineStyleLanguage": "scss",
+            "assets": ["apps/coins/src/favicon.ico", "apps/coins/src/assets"],
+            "styles": ["apps/coins/src/styles.scss"],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "500kb",
+                  "maximumError": "1mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "2kb",
+                  "maximumError": "4kb"
+                }
+              ],
+              "fileReplacements": [
+                {
+                  "replace": "apps/coins/src/environments/environment.ts",
+                  "with": "apps/coins/src/environments/environment.prod.ts"
+                }
+              ],
+              "outputHashing": "all"
+            },
+            "development": {
+              "buildOptimizer": false,
+              "optimization": false,
+              "vendorChunk": true,
+              "extractLicenses": false,
+              "sourceMap": true,
+              "namedChunks": true
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "configurations": {
+            "production": {
+              "browserTarget": "coins:build:production"
+            },
+            "development": {
+              "browserTarget": "coins:build:development"
+            }
+          },
+          "defaultConfiguration": "development"
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "coins:build"
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "apps/coins/src/**/*.ts",
+              "apps/coins/src/**/*.html"
+            ]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/apps/coins"],
+          "options": {
+            "jestConfig": "apps/coins/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "coins-e2e": {
+      "root": "apps/coins-e2e",
+      "sourceRoot": "apps/coins-e2e/src",
+      "projectType": "application",
+      "architect": {
+        "e2e": {
+          "builder": "@nrwl/cypress:cypress",
+          "options": {
+            "cypressConfig": "apps/coins-e2e/cypress.json",
+            "tsConfig": "apps/coins-e2e/tsconfig.e2e.json",
+            "devServerTarget": "coins:serve:development"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "coins:serve:production"
+            }
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["apps/coins-e2e/**/*.{js,ts}"]
+          }
+        }
+      }
+    },
+    "crypto": {
+      "projectType": "library",
+      "root": "libs/crypto",
+      "sourceRoot": "libs/crypto/src",
+      "prefix": "nx-sample-workspace",
+      "architect": {
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/crypto"],
+          "options": {
+            "jestConfig": "libs/crypto/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/crypto/src/**/*.ts",
+              "libs/crypto/src/**/*.html"
+            ]
+          }
+        }
+      }
+    }
+  },
+  "cli": {
+    "defaultCollection": "@nrwl/angular"
+  },
+  "schematics": {
+    "@nrwl/angular": {
+      "application": {
+        "linter": "eslint"
+      },
+      "library": {
+        "linter": "eslint"
+      },
+      "storybook-configuration": {
+        "linter": "eslint"
+      }
+    },
+    "@nrwl/angular:application": {
+      "style": "scss",
+      "linter": "eslint",
+      "unitTestRunner": "jest",
+      "e2eTestRunner": "cypress"
+    },
+    "@nrwl/angular:library": {
+      "style": "scss",
+      "linter": "eslint",
+      "unitTestRunner": "jest"
+    },
+    "@nrwl/angular:component": {
+      "style": "scss"
+    }
+  },
+  "defaultProject": "coins"
+}
