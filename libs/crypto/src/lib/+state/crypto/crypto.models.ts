@@ -15,3 +15,8 @@ export interface CryptoEntity {
   vwap24Hr: string,
   explorer:string
 }
+
+export interface Cryptoentityresult{
+  data:[],
+  timestamp:number
+}

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CryptoService } from '../../services/crypto.service';
+import {CryptoEntity,Cryptoentityresult} from '../../+state/crypto/crypto.models';
 
 
 @Component({
@@ -9,7 +10,7 @@ import { CryptoService } from '../../services/crypto.service';
 })
 export class CurrencyListComponent implements OnInit {
 
-  currencies: any;
+  currencies: CryptoEntity[] =[];
   displayedColumns: string[] = ['id', 'name', 'price'];
   
   constructor(private cryptoServcie:CryptoService ) { }
