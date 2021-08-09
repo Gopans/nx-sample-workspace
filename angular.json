@@ -18,7 +18,7 @@
             "tsConfig": "apps/coins/tsconfig.app.json",
             "inlineStyleLanguage": "scss",
             "assets": ["apps/coins/src/favicon.ico", "apps/coins/src/assets"],
-            "styles": ["apps/coins/src/styles.scss"],
+            "styles": ["./node_modules/@angular/material/prebuilt-themes/indigo-pink.css", "apps/coins/src/styles.scss"],
             "scripts": []
           },
           "configurations": {

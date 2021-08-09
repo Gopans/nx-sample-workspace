@@ -10,6 +10,8 @@ import { CryptoService } from '../../services/crypto.service';
 export class CurrencyListComponent implements OnInit {
 
   currencies: any;
+  displayedColumns: string[] = ['id', 'name', 'price'];
+  
   constructor(private cryptoServcie:CryptoService ) { }
 
   ngOnInit(): void {
